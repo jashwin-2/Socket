@@ -31,7 +31,7 @@ return string;
 
 var div = document.getElementById("audio");
 var audio = new XMLHttpRequest();
-audio.open('GET','http://192.168.43.156:8081/audio/');
+audio.open('GET',window.location.href+'audio/');
 audio.onload=function(){
 var audioResponse = JSON.parse(audio.responseText);
 string = print(audioResponse);
@@ -41,7 +41,7 @@ div.insertAdjacentHTML('beforeend',string);
 
 var div1 =document.getElementById("video");
 var video = new XMLHttpRequest();
-video.open('GET','http://192.168.43.156:8081/video/');
+video.open('GET',window.location.href+'video/');
 video.onload=function(){
 var videoResponse = JSON.parse(video.responseText);
 string = print(videoResponse);

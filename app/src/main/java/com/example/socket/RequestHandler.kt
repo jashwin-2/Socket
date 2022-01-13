@@ -12,7 +12,6 @@ import java.lang.Exception
 import java.net.Socket
 
 class RequestHandler(private val mContext: Context) {
-    private val mGson: Gson = GsonBuilder().serializeNulls().create()
     private val mAssets: AssetManager = mContext.resources.assets
 
     @Throws(IOException::class)
@@ -50,19 +49,7 @@ class RequestHandler(private val mContext: Context) {
             } else {
                 bytes = Utils.loadContent(route, mAssets)!!
             }
-            //
-//            if (null == bytes) {
-//                writeServerError(output);
-//                return;
-//            }
-//
-//            // Send out the content.
 
-//            else {
-//                bytes = Utils.loadContent(route, mAssets);
-//                Log.d("Called", "handle:2323 ");
-//
-//           }
             output.println("HTTP/1.0 200 OK")
             output.println("Content-Type: " + detectMimeType(route))
             output.println("Content-Length: " + bytes.size)
