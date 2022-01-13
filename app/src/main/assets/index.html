@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <title>Cliq Stastics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='shortcut icon' href='favicon.ico' type='image/x-icon'>
+
+</head>
+<body>
+<h1> Audio Statistics </h1>
+<div id="audio"></div>
+<h1> Video Statistics </h1>
+<div id="video"></div>
+
+
+<script>
+function print(data){
+var string = "";
+Object.entries(data).forEach((entry) =>{
+const [key , value] = entry;
+Object.entries(value).forEach((entry1) =>{
+const [key1 , value1] = entry1;
+string+="<p>"+key+'&ensp;:<br>&emsp;&emsp;'+key1+'&ensp;:&ensp;'+value1+".</p>";
+
+})});
+return string;
+}
+
+var div = document.getElementById("audio");
+var audio = new XMLHttpRequest();
+audio.open('GET','http://192.168.43.156:8081/audio/');
+audio.onload=function(){
+var audioResponse = JSON.parse(audio.responseText);
+string = print(audioResponse);
+div.insertAdjacentHTML('beforeend',string);
+
+}
+
+var div1 =document.getElementById("video");
+var video = new XMLHttpRequest();
+video.open('GET','http://192.168.43.156:8081/video/');
+video.onload=function(){
+var videoResponse = JSON.parse(video.responseText);
+string = print(videoResponse);
+div1.insertAdjacentHTML('beforeend',string);
+}
+
+audio.send();
+video.send();
+
+
+</script>
+</body>
+</html>
